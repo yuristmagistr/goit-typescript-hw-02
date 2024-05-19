@@ -132,7 +132,7 @@ import LoadMoreBtn from './LoadMoreBtn';
 import ImageModal from './ImageModal';
 
 interface Image {
-  alt: string | null;
+  alt: string;
   id: string;
   small: string;
   regular: string;
@@ -169,7 +169,7 @@ const App: React.FC = () => {
                     }
                 });
                 const normalizeData: Image[] = response.data.results.map(({ alt_description, id, urls }: any) => ({
-                    alt: alt_description,
+                    alt: alt_description || '',
                     id,
                     small: urls.small,
                     regular: urls.regular,

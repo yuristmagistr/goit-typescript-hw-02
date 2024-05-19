@@ -30,11 +30,14 @@ import React from 'react';
 import ImageCard from './ImageCard';
 import css from "./ImageGallery.module.css";
 
+
 interface Image {
+  alt: string;
   id: string;
   small: string;
-  alt: string;
+  regular: string; // Должно быть определено и здесь
 }
+
 
 interface ImageGalleryProps {
   images: Image[];
