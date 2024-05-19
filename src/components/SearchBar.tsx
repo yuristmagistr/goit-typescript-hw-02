@@ -43,13 +43,66 @@
 
 
 
-import { Field, Form, Formik } from "formik";
+// import { Field, Form, Formik } from "formik";
+// import toast, { Toaster } from "react-hot-toast";
+// import css from "./SearchBar.module.css";
+
+// const SearchBar = ({ onSubmit }) => {
+//   const handleSubmit = (values, actions) => {
+//     const formattedSearch = values.query.trim().toLowerCase(); // змінено з 'values.search' на 'values.query'
+
+//     if (!formattedSearch) {
+//       toast.error("The search field cannot be empty!");
+//     } else {
+//       onSubmit(formattedSearch);
+//       actions.resetForm();
+//     }
+//   };
+//   return (
+//     <header className={css.header}>
+//       <Formik
+//         initialValues={{ query: "" }}
+//         onSubmit={handleSubmit} // використання функції handleSubmit
+//       >
+//         <Form className={css.Form}>
+//           <Field
+//             className={css.Field}
+//             placeholder="Search images and photos"
+//             type="text"
+//             name="query"
+//           />
+//           <button className={css.searchBtn} type="submit">
+//             Search
+//           </button>
+//         </Form>
+//       </Formik>
+//       <Toaster position="top-right" />
+//     </header>
+//   );
+// };
+// export default SearchBar;
+
+
+
+
+
+
+
+import { Field, Form, Formik, FormikHelpers } from "formik";
 import toast, { Toaster } from "react-hot-toast";
 import css from "./SearchBar.module.css";
 
-const SearchBar = ({ onSubmit }) => {
-  const handleSubmit = (values, actions) => {
-    const formattedSearch = values.query.trim().toLowerCase(); // змінено з 'values.search' на 'values.query'
+interface SearchBarProps {
+  onSubmit: (query: string) => void;
+}
+
+interface FormValues {
+  query: string;
+}
+
+const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }) => {
+  const handleSubmit = (values: FormValues, actions: FormikHelpers<FormValues>) => {
+    const formattedSearch = values.query.trim().toLowerCase();
 
     if (!formattedSearch) {
       toast.error("The search field cannot be empty!");
@@ -58,11 +111,12 @@ const SearchBar = ({ onSubmit }) => {
       actions.resetForm();
     }
   };
+
   return (
     <header className={css.header}>
       <Formik
         initialValues={{ query: "" }}
-        onSubmit={handleSubmit} // використання функції handleSubmit
+        onSubmit={handleSubmit}
       >
         <Form className={css.Form}>
           <Field
@@ -80,4 +134,5 @@ const SearchBar = ({ onSubmit }) => {
     </header>
   );
 };
+
 export default SearchBar;
